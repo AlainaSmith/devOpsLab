@@ -16,6 +16,16 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '/public/index.html'))
 })
 
+app.post('/api/student', () => (req, res) => {
+    let {name} = req.body
+    name = name.trim()
+
+    students.push(name)
+
+    rollbar.log('Student added succesfully', {author:'Alaina', type: 'manual'})    //create students array up top
+    res.status(200).send(students)
+})
+
 
 const port = process.env.PORT || 4646
 

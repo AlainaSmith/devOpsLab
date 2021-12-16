@@ -1,10 +1,7 @@
 const express = require('express')
 const path = require('path')
 
-
-
 const Rollbar = require('rollbar')
-
 
 const rollbar = new Rollbar({
   accessToken: '1f25d88fbfc74df88243ed100f4c2e71',
@@ -12,12 +9,11 @@ const rollbar = new Rollbar({
   captureUnhandledRejections: true,
 })
 
-
-
 const app = express()
 
 app.get('/', (req, res) => {
     newFunction()
+})
     .catch(err => console.log(err))
  
 app.get('/', (req, res) => {
@@ -25,15 +21,15 @@ app.get('/', (req, res) => {
     rollbar.info('html file served successfully.')
 })
 
-app.post('/api/student', () => (req, res) => {
-    let {name} = req.body
-    name = name.trim()
+// app.post('/api/student', () => (req, res) => {
+//     let {name} = req.body
+//     name = name.trim()
 
-    students.push(name)
+//     students.push(name)
 
-    rollbar.log('Student added succesfully', {author:'Alaina', type: 'manual'})    //create students array up top
-    res.status(200).send(students)
-})
+//     rollbar.log('Student added succesfully', {author:'Alaina', type: 'manual'})    //create students array up top
+//     res.status(200).send(students)
+// })
 
 
 const port = process.env.PORT || 4646

@@ -16,27 +16,29 @@ const rollbar = new Rollbar({
 
 const app = express()
 
-
+app.get('/', (req, res) => {
+      try {
+        nonExistentFunction();
+      } catch (error) {
+        console.error(error)
+}
+})
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '/public/index.html'))
     rollbar.info('html file served successfully.')
+    .catch(err => console.log(err))
 
 })
 
 app.post('/api/student', () => (req, res) => {
-    try {
-        nonExistentFunction();
-      } catch (error) {
-        console.error(error)
-    // let {name} = req.body
-    // name = name.trim()
+    let {name} = req.body
+    name = name.trim()
 
-    // students.push(name)
+    students.push(name)
 
-    // rollbar.log('Student added succesfully', {author:'Alaina', type: 'manual'})    //create students array up top
-    // res.status(200).send(students)
-}
+    rollbar.log('Student added succesfully', {author:'Alaina', type: 'manual'})    //create students array up top
+    res.status(200).send(students)
 })
 
 

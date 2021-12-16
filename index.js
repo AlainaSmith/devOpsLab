@@ -13,7 +13,7 @@ const app = express()
 
 // app.get('/', (req, res) => {
 //     newFunction()
-// }).catch(err => console.log(err))
+}).catch(err => console.log(err))
  
 
 // app.get('/', (req, res) => {

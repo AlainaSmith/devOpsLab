@@ -16,6 +16,13 @@ app.get('/', (req, res) => {
 }).catch(err => console.log(err))
  
 
+// app.get('/', (req, res) => {
+// try {
+//     nonExistentFunction();
+//   } catch (error) {
+//     console.error(error);
+
+
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '/public/index.css'))
 },
@@ -30,6 +37,15 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '/public/index.css'))
 }),
 
+app.post('/api/student', () => (req, res) => {
+    let {name} = req.body
+    name = name.trim()
+
+    students.push(name)
+
+    rollbar.log('Student added succesfully', {author:'Alaina', type: 'manual'})    //create students array up top
+    res.status(200).send(students)
+}),
 
 app.use(rollbar.errorHandler())
 
@@ -39,12 +55,3 @@ const port = process.env.PORT || 4646
 app.listen(port, () => console.log(`Take us to warp ${port}!`))
 
 
-// app.post('/api/student', () => (req, res) => {
-//     let {name} = req.body
-//     name = name.trim()
-
-//     students.push(name)
-
-//     rollbar.log('Student added succesfully', {author:'Alaina', type: 'manual'})    //create students array up top
-//     res.status(200).send(students)
-// })

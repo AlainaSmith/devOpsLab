@@ -48,6 +48,7 @@ app.post('/api/student', () => (req, res) => {
 }),
 
 app.use(rollbar.errorHandler())
+)
 
 const port = process.env.PORT || 4646
 

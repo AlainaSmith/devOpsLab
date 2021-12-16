@@ -13,13 +13,31 @@ const app = express()
 
 app.get('/', (req, res) => {
     newFunction()
-})
-    .catch(err => console.log(err))
+}).catch(err => console.log(err))
  
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '/public/index.css'))
+},
+
+
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '/public/index.html'))
     rollbar.info('html file served successfully.')
-})
+}),
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '/public/index.css'))
+}),
+
+
+app.use(rollbar.errorHandler())
+
+const port = process.env.PORT || 4646
+
+
+app.listen(port, () => console.log(`Take us to warp ${port}!`))
+
 
 // app.post('/api/student', () => (req, res) => {
 //     let {name} = req.body
@@ -30,12 +48,3 @@ app.get('/', (req, res) => {
 //     rollbar.log('Student added succesfully', {author:'Alaina', type: 'manual'})    //create students array up top
 //     res.status(200).send(students)
 // })
-
-
-const port = process.env.PORT || 4646
-
-
-app.use(rollbar.errorHandler())
-
-
-app.listen(port, () => console.log(`Take us to warp ${port}!`))

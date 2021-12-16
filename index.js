@@ -25,13 +25,18 @@ app.get('/', (req, res) => {
 })
 
 app.post('/api/student', () => (req, res) => {
-    let {name} = req.body
-    name = name.trim()
+    try {
+        nonExistentFunction();
+      } catch (error) {
+        console.error(error)
+    // let {name} = req.body
+    // name = name.trim()
 
-    students.push(name)
+    // students.push(name)
 
-    rollbar.log('Student added succesfully', {author:'Alaina', type: 'manual'})    //create students array up top
-    res.status(200).send(students)
+    // rollbar.log('Student added succesfully', {author:'Alaina', type: 'manual'})    //create students array up top
+    // res.status(200).send(students)
+}
 })
 
 

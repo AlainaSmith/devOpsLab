@@ -17,18 +17,12 @@ const rollbar = new Rollbar({
 const app = express()
 
 app.get('/', (req, res) => {
-      try {
-        nonExistentFunction();
-      } catch (error) {
-        console.error(error)
-}
-})
-
+    newFunction()
+    .catch(err => console.log(err))
+ 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '/public/index.html'))
     rollbar.info('html file served successfully.')
-    .catch(err => console.log(err))
-
 })
 
 app.post('/api/student', () => (req, res) => {
